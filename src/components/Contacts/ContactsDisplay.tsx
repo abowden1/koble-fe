@@ -1,21 +1,34 @@
-import NewContactButton from "./NewContactButton.tsx";
-import ContactSearch from "../Search/ContactSearch.tsx";
+import ContactSearchForm from "../../Forms/ContactSearchForm.tsx";
 import ContactsResultsGrid from "./ContactsResultsGrid.tsx";
+import {useState} from "react";
+import ContactDetailsDisplay from "./ContactDetailsDisplay.tsx";
+import SearchResultsGrid from "./SearchResultsGrid.tsx";
 
 interface Props {
     userId: string;
 }
 
 function ContactsDisplay({ userId }: Props) {
+    const [contactIdForDetails, setContactIdForDetails] = useState<string | undefined>(undefined)
+    const [searchParams, setSearchParams] = useState<string | undefined>(undefined)
+    const [searchedContacts, setSearchedContacts] = useState<Contact[]>([])
     return (
         <>
-            <NewContactButton userId={userId || ''} />
-            <div className="container justify-content-center gy-3 test">
-                <div className="py-4">
-                    <ContactSearch/>
+            {contactIdForDetails == undefined ? (
+                <div className="container justify-content-center gy-3">
+                    <hr className="dotted"/>
+                    <div className="py-4">
+                        <ContactSearchForm userId={userId} setSearchParams={setSearchParams} setSearchedContacts={setSearchedContacts}/>
+                    </div>
+                    <hr className="rounded"/>
+                    {searchParams ?
+                        <SearchResultsGrid searchParams={searchParams} setSearchParams={setSearchParams} searchedContacts={searchedContacts} setContactIdForDetails={setContactIdForDetails}/>
+                        :
+                        <ContactsResultsGrid userId={userId || ''} setContactIdForDetails={setContactIdForDetails}/>
+                    }
                 </div>
-                <ContactsResultsGrid  userId={userId || ''}/>
-            </div>
+            ):
+                (<ContactDetailsDisplay contactIdForDetails={contactIdForDetails} setContactIdForDetails={setContactIdForDetails}/>)}
         </>
     )
 }

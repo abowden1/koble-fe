@@ -1,25 +1,33 @@
 interface Props {
-    userId: string;
+    displayNewContactForm: boolean;
+    setDisplayNewContactForm: React.Dispatch<React.SetStateAction<boolean>>;
+    currentCategoryId: string;
+    setContactCategory: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-function NewContactButton({ userId}: Props) {
+function NewContactButton({
+                              displayNewContactForm,
+                              setDisplayNewContactForm,
+                              currentCategoryId,
+                              setContactCategory
+                          }: Props) {
     return (
         <>
-            <div className="container py-5">
-                <div className="row">
-                    <div className="col d-flex justify-content-end">
-                        <a
-                            className="btn btn-outline-secondary"
-                            role="button"
-                            href={`/user/${userId}/contact`}
-                        >
-                            <i className="bi-person-plus koble-blue h4"> New Contact </i>
-                        </a>
-                    </div>
-                </div>
+            <div className={`col justify-content-start  ${displayNewContactForm ? "hidden" : ""}`}>
+                <button
+                    className="btn"
+                    onClick={() => handleClick(setDisplayNewContactForm, currentCategoryId, setContactCategory)}
+                >
+                    <i className="bi-person-plus koble-blue h4"></i>
+                </button>
             </div>
         </>
     )
+}
+
+function handleClick(setDisplayNewContactForm: (arg0: boolean) => void, currentCategoryId: string, setContactCategory: (arg0: any) => void) {
+    setDisplayNewContactForm(true);
+    setContactCategory(currentCategoryId)
 }
 
 export default NewContactButton

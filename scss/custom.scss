@@ -184,3 +184,37 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.component-popout {
+  background: #ececec;
+}
+
+.img-square-card-lg {
+  object-fit: cover;
+  width: 600px;
+  height: 600px;
+}
+
+.add-contact-box {
+  width: 500px;
+  height: 650px;
+  outline: #535bf2 3px;
+  background: #213547;
+}
+
+.test-card {
+  width: 28rem;
+}
+
+.bg-koble-blue {
+  background: midnightblue;
+}
+
+hr.dotted {
+  border-top: 3px dashed #bbb;
+}
+
+hr.rounded {
+  border-top: 4px solid #bbb;
+  border-radius: 2px;
+}
