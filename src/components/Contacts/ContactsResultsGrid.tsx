@@ -10,13 +10,18 @@ import NewContactForm from "../../Forms/NewContactForm.tsx";
 interface Props {
     userId: string;
     setContactIdForDetails: React.Dispatch<React.SetStateAction<string | undefined>>;
+    filterableCategoryId?: string;
+    setFilterableCategoryId?: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-function ContactsResultsGrid({userId, setContactIdForDetails}: Props) {
+function ContactsResultsGrid({userId, setContactIdForDetails, filterableCategoryId, setFilterableCategoryId}: Props) {
     const [categories, setCategories] = useState([] as Category[])
     const [displayNewContactForm, setDisplayNewContactForm] = useState(false)
     const [newContactCategory, setNewContactCategory] = useState<string | undefined>(undefined)
-    const dataUrl = `${backendUrl}/users/${userId}/categories?include=contacts`
+
+    const dataUrl = filterableCategoryId ?
+        `${backendUrl}/users/${userId}/categories/${filterableCategoryId}?include=contacts` :
+        `${backendUrl}/users/${userId}/categories?include=contacts`
 
     useEffect(() => {
         axios.get(dataUrl)

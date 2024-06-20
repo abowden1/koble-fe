@@ -5,9 +5,10 @@ import {CategoriesApiResponseMapper} from "../Utils/ApiResponseMappers.ts";
 
 interface Props {
     userId: string;
+    setFilterableCategoryId: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-function CategoryFilterBar({ userId }: Props) {
+function CategoryFilterBar({userId, setFilterableCategoryId}: Props) {
     const [categories, setCategories] = useState([] as Category[])
     const dataUrl = `${backendUrl}/users/${userId}/categories?include=contacts`
 
@@ -24,10 +25,16 @@ function CategoryFilterBar({ userId }: Props) {
                         <button className="btn btn-light text-center m-1">
                             <i className="bi bi-pencil-square koble-blue"/>
                         </button>
+                        <button className="btn btn-light text-center m-1"
+                                onClick={() => setFilterableCategoryId(undefined)}
+                                role="button">
+                            <h6 className="text-dark-emphasis">Show All</h6>
+                        </button>
                         {categories.map((category) => (
-
-                            <button className="btn btn-light text-center m-1">
-                                <h6 className="text-dark-emphasis">{category.category}</h6>
+                            <button className="btn btn-light text-center m-1"
+                                    onClick={() => setFilterableCategoryId(category.id)}
+                                    role="button">
+                                <h6 className="text-dark-emphasis" id={category.id}>{category.category}</h6>
                             </button>
 
                         ))}

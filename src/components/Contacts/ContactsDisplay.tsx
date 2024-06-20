@@ -6,9 +6,10 @@ import SearchResultsGrid from "./SearchResultsGrid.tsx";
 
 interface Props {
     userId: string;
+    filterableCategoryId?: string;
 }
 
-function ContactsDisplay({ userId }: Props) {
+function ContactsDisplay({ userId, filterableCategoryId }: Props) {
     const [contactIdForDetails, setContactIdForDetails] = useState<string | undefined>(undefined)
     const [searchParams, setSearchParams] = useState<string | undefined>(undefined)
     const [searchedContacts, setSearchedContacts] = useState<Contact[]>([])
@@ -24,7 +25,7 @@ function ContactsDisplay({ userId }: Props) {
                     {searchParams ?
                         <SearchResultsGrid searchParams={searchParams} setSearchParams={setSearchParams} searchedContacts={searchedContacts} setContactIdForDetails={setContactIdForDetails}/>
                         :
-                        <ContactsResultsGrid userId={userId || ''} setContactIdForDetails={setContactIdForDetails}/>
+                        <ContactsResultsGrid userId={userId || ''} setContactIdForDetails={setContactIdForDetails} filterableCategoryId={filterableCategoryId}/>
                     }
                 </div>
             ):
