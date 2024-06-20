@@ -5,9 +5,8 @@ interface Props {
 function BaseContactDetails({ contact }: Props) {
   return (
     <>
-      <div className="card-content gy-4">
+      <div className="card-content gy-4 align-items-center">
         <div className="row gx-0 justify-content-start align-items-center">
-          <div className="col-2 d-flex justify-content-start" />
           <div className="col d-flex justify-content-start">
             <h2 className="text-capitalize">
               {contact.name}

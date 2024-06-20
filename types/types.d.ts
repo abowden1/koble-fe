@@ -1,14 +1,14 @@
 type Squad = {
-  id: string;
+  id?: string;
   name: string;
-  active: boolean;
+  active?: boolean;
   users?: User[]
 }
 
 type Squads = [Squad]
 
 type User = {
-  id: string;
+  id?: string;
   squadId?: string;
   firstName: string;
   lastName: string;
@@ -16,7 +16,7 @@ type User = {
   email?: string;
   phoneNumber?: string;
   photoUrl?: string;
-  active: boolean;
+  active?: boolean;
   categories?: Category[];
   contacts?: Contact[];
   squad?: Squad
@@ -27,10 +27,10 @@ type User = {
 // type Users = [User];
 
 type Category = {
-  id: string;
+  id?: string;
   userId: string;
   category: string;
-  active: boolean;
+  active?: boolean;
   contacts?: Contact[];
   user?: User;
 }
@@ -38,54 +38,59 @@ type Category = {
 // type Categories = [Category]
 
 type Contact = {
-  id: string;
+  id?: string;
   userId: string;
   categoryId: string;
   name: string;
   email?: string;
   phoneNumber?: string;
   photoUrl?: string;
-  active: boolean;
+  active?: boolean;
   contactFields?: ContactField[];
   user?: User;
   category?: Category;
+  tags?: Tag[];
+  notes?: Note[]
 }
 
 // type Contacts = [Contact]
 
 type ContactField =  {
-  id: string;
+  id?: string;
   contactId: string;
   key: string;
   value: string;
-  active: boolean;
+  active?: boolean;
   contact?: Contact;
 }
 
-// type ContactFields = [ContactField]
 
-
-// TODO implement on backend!
-// type Tag = {
-//   id: string;
-//   contactId: string;
-//   tag: string;
-//   active: boolean;
-// }
-//
-// type Tags = [Tag]
-
-type SquadResponse = {
+type Tag = {
   id: string;
-  name: string;
-  active: boolean;
-  users?: UserResponse[]
+  contactId: string;
+  tag: string;
+  active?: boolean;
 }
 
-// type SquadsResponse = [SquadResponse]
-
-type UserResponse = {
+type Note = {
   id: string;
+  contactId: string;
+  note: string;
+  active?: boolean;
+  createdAt: string;
+}
+
+
+type SquadApi = {
+  id?: string;
+  name: string;
+  active?: boolean;
+  users?: UserApi[]
+}
+
+
+type UserApi = {
+  id?: string;
   squad_id?: string;
   first_name: string;
   last_name: string;
@@ -93,61 +98,64 @@ type UserResponse = {
   email?: string;
   phone_number?: string;
   photo_url?: string;
-  active: boolean;
-  categories?: CategoryResponse[];
-  contacts?: ContactResponse[];
-  squad?: SquadResponse
+  active?: boolean;
+  categories?: CategoryApi[];
+  contacts?: ContactApi[];
+  squad?: SquadApi
 
   // TODO: require contact info
 };
 
-// type UsersResponse = [UserResponse];
 
-type CategoryResponse = {
-  id: string;
+type CategoryApi = {
+  id?: string;
   user_id: string;
   category: string;
-  active: boolean;
-  contacts: ContactResponse[];
-  user: UserResponse;
+  active?: boolean;
+  contacts: ContactApi[];
+  user: UserApi;
 }
 
-// type CategoriesResponse = [CategoryResponse]
 
-type ContactResponse = {
-  id: string;
+type ContactApi = {
+  id?: string;
   user_id: string;
   name: string;
   email?: string;
   phone_number?: string;
   category_id: string;
   photo_url?: string;
-  active: boolean;
-  fields?: ContactFieldResponse[];
-  user?: UserResponse;
-  category?: CategoryResponse;
+  active?: boolean;
+  fields?: ContactFieldApi[];
+  user?: UserApi;
+  category?: CategoryApi;
+  tags?: TagApi[];
+  notes?: NoteApi[]
 }
 
-// type ContactsResponse = [ContactResponse]
 
-type ContactFieldResponse =  {
-  id: string;
+type ContactFieldApi =  {
+  id?: string;
   contact_id: string;
   key: string;
   value: string;
-  active: boolean;
-  contact?: ContactResponse;
+  active?: boolean;
+  contact?: ContactApi;
 }
 
-// type ContactFieldsResponse = [ContactFieldResponse]
 
 
-// TODO implement on backend!
-// type TagResponse = {
-//   id: string;
-//   contactId: string;
-//   tag: string;
-//   active: boolean;
-// }
-//
-// type TagsResponse = [TagResponse]
+type TagApi = {
+  id: string;
+  contact_id: string;
+  tag: string;
+  active: boolean;
+}
+
+type NoteApi = {
+  id: string;
+  contact_id: string;
+  note: string;
+  active?: boolean;
+  created_at: Date;
+}

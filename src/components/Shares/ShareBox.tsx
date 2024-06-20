@@ -6,6 +6,7 @@ interface Props {
 }
 
 function ShareBox ({ contact, sharedContacts, setSharedContacts }: Props) {
+    // TODO: collect selected contacts for shares and display in an "offcanvas" element
     return (
         <>
             <div className="col d-flex justify-content-end align-items-center">

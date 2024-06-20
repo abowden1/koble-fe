@@ -3,7 +3,7 @@ import SelectLoginButton from "../../components/Utils/SelectLoginButton.tsx";
 
 import axios from 'axios'
 import {backendUrl} from "../../AppConfig.tsx";
-import {UsersResponseMapper} from "../../components/Utils/ResponseMappers.ts";
+import {UsersApiResponseMapper} from "../../components/Utils/ApiResponseMappers.ts";
 
 
 function LoginPage() {
@@ -16,7 +16,7 @@ function LoginPage() {
 
   useEffect(() => {
     axios.get(dataUrl)
-        .then(response => setUsers(UsersResponseMapper(response.data.users)))
+        .then(response => setUsers(UsersApiResponseMapper(response.data.users)))
   }, [dataUrl])
 
   return (
