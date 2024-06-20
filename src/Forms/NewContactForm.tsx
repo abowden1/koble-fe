@@ -71,7 +71,7 @@ function NewContactForm({userId, categoryId, setDisplayNewContactForm, setContac
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Photo Url..TODO: UPLOAD OPTION!"
+                                placeholder="Photo Url"
                                 aria-label="Photo Url"
                                 name="photoUrl"
                                 required

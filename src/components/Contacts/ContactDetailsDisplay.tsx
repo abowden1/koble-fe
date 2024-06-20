@@ -66,7 +66,7 @@ function ContactDetailsDisplay({contactIdForDetails, setContactIdForDetails}: Pr
                                     />
                                 </div>
                                 <div className="col-8">
-                                    <div className="card-header bg-light-blue bg-gradient">
+                                    <div className="card-header mid-grey bg-gradient">
                                         <div className="row justify-content-center">
                                             <div className="col-4 text-center">
                                                 <button
