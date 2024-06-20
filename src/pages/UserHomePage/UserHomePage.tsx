@@ -9,6 +9,7 @@ import {useState} from "react";
 function UserHomePage() {
     const {userId} = useParams();
     const [filterableCategoryId, setFilterableCategoryId] = useState<string | undefined>(undefined)
+
     return (
         <>
             <CategoryFilterBar userId={userId || ''} setFilterableCategoryId={setFilterableCategoryId}/>

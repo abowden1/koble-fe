@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {backendUrl} from "../../AppConfig.tsx";
 import axios from "axios";
 import {CategoriesApiResponseMapper} from "../Utils/ApiResponseMappers.ts";
+import NewCategoryForm from "../../Forms/NewCategoryForm.tsx";
 
 interface Props {
     userId: string;
@@ -10,6 +11,7 @@ interface Props {
 
 function CategoryFilterBar({userId, setFilterableCategoryId}: Props) {
     const [categories, setCategories] = useState([] as Category[])
+    const [showNewCategoryForm, setShowNewCategoryForm] = useState(false)
     const dataUrl = `${backendUrl}/users/${userId}/categories?include=contacts`
 
     useEffect(() => {
@@ -22,22 +24,33 @@ function CategoryFilterBar({userId, setFilterableCategoryId}: Props) {
                 <div className="row align-items-start">
                     <hr className="dotted"/>
                     <div className="col d-flex justify-content-start align-items-start m-1">
-                        <button className="btn btn-light text-center m-1">
-                            <i className="bi bi-pencil-square koble-blue"/>
+                        <button
+                            className="btn btn-light text-center m-1"
+                            role="button"
+                            onClick={() => setShowNewCategoryForm(!showNewCategoryForm)}
+                        >
+                            <i className={`bi ${!showNewCategoryForm ? "bi-pencil-square" : "bi-x-lg"} koble-blue`}/>
                         </button>
-                        <button className="btn btn-light text-center m-1"
-                                onClick={() => setFilterableCategoryId(undefined)}
-                                role="button">
-                            <h6 className="text-dark-emphasis">Show All</h6>
-                        </button>
-                        {categories.map((category) => (
-                            <button className="btn btn-light text-center m-1"
-                                    onClick={() => setFilterableCategoryId(category.id)}
-                                    role="button">
-                                <h6 className="text-dark-emphasis" id={category.id}>{category.category}</h6>
-                            </button>
+                        {showNewCategoryForm ?
+                            <NewCategoryForm userId={userId} setShowNewCategoryForm={setShowNewCategoryForm}/>
+                            :
+                            (
+                                <>
+                                    <button className="btn btn-light text-center m-1"
+                                            onClick={() => setFilterableCategoryId(undefined)}
+                                            role="button">
+                                        <h6 className="text-dark-emphasis">Show All</h6>
+                                    </button>
+                                    {categories.map((category) => (
+                                        <button className="btn btn-light text-center m-1"
+                                                onClick={() => setFilterableCategoryId(category.id)}
+                                                role="button">
+                                            <h6 className="text-dark-emphasis" id={category.id}>{category.category}</h6>
+                                        </button>
+                                    ))}
+                                </>
 
-                        ))}
+                            )}
                     </div>
                 </div>
             </div>
